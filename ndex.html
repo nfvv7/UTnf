@@ -1,0 +1,92 @@
+<!DOCTYPE html><!-- ■■HTMLテンプレ■■ -->
+<html lang="ja">
+<head><meta charset="UTF-8">
+  <!-- 指定秒数ごとにページを自動更新する。開発終了後はコメントアウトする。 -->
+  <!--
+  <meta http-equiv="refresh" content="5">
+ -->
+<!-- ●タイトルを指定する(ページのタブに表示される文字列) -->
+<title>コマンド一覧</title>
+<!-- ●読み込むcssファイルを指定する -->
+<link rel="stylesheet" type="text/css" href="css/NStandardCSS.css">
+
+<!-- 文書の表示方法をブラウザーに合わせ、表示倍率を1にする-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+</head>
+<body>
+<!-- ■■HTMLテンプレ■■ -->
+<h1 class="class1">コマンド一覧</h1>
+
+
+<ul>
+  <li><a target="_blank" href="CommandHtml/コマンド名1.html">コマンド名1</a></li>
+  <dd>コマンドの簡易説明</dd><p></p>
+
+  <li><a target="_blank" href="CommandHtml/コマンド名1.html">コマンド名2</a></li>
+  <dd>コマンドの簡易説明</dd><p></p>
+
+  <li><a target="_blank" href="CommandHtml/コマンド名1.html">コマンド名3</a></li>
+  <dd>コマンドの簡易説明</dd><p></p>
+
+  <li><a target="_self" href="CommandHtml/コマンド名1.html">コマンド名4</a></li>
+  <dd>コマンドの簡易説明</dd><p></p>
+
+</ul>
+<p></p><p></p><p></p>
+<p></p><p></p><p></p>
+
+
+
+<input type="file" id="file" name="upfile[]" webkitdirectory />
+<div id="list"></div>
+<script>
+  document.getElementById("file").addEventListener("change", ev => {
+    for (let i = 0; i < ev.target.files.length; i++) {
+      let file = ev.target.files[i];
+
+      // ディレクトリの相対パス
+      let relativePath = file.webkitRelativePath;
+
+      let fileReader = new FileReader();
+      fileReader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var figure = document.createElement("figure");
+          figure.innerHTML = `
+            <img class="thumb" src="${e.target.result}" />
+            <figcaption>${theFile.name}</figcaption>
+           `;
+          document.getElementById("list").insertBefore(figure, null);
+        };
+      })(file);
+
+      fileReader.readAsDataURL(file);
+    }
+  });
+</script>
+
+
+
+<div id="list"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ■■HTMLテンプレ■■ -->
+</body>
+<!-- ■■HTMLテンプレ■■ --></html>
